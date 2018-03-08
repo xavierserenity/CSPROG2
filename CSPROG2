@@ -1,0 +1,138 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <fstream>
+using namespace std;
+
+class Register{ // Registration class
+	public:
+		Register(){
+			system("CLS");
+			cout << "\n\t\t\t\t\t---------Register---------" << endl;
+			cout << "\tName: \t";
+			cin.ignore();
+			getline(cin,name);
+			cout << "\tAge: \t";
+			cin >> age;
+			cout << "\tStudent Number: ";
+			cin >> studentnumber;
+			}
+		string name;
+		int age;
+		int studentnumber;
+};
+class Edit{ // Edit class
+	public:
+		Edit(){
+			system("CLS");
+			cout << "\n\t\t\t\t\t----------Edit----------" << endl;
+			cout << "\tName: \t";
+			cin.ignore();
+			getline(cin,name);
+			cout << "\tAge: \t";
+			cin >> age;
+			cout << "\tStudent Number: \t";
+			cin >> studentnumber;
+		}
+	string name;
+	string age;
+	string studentnumber;
+};
+
+class Save{ //Save class
+	public:
+			Save(){		
+				try
+				{				
+				ofstream FinalProject;
+				FinalProject.open("FinalProjectCSPROG2.txt");
+				
+				FinalProject << name <<endl;
+				FinalProject << age <<endl;
+				FinalProject << studentnumber <<endl;
+				
+				FinalProject.close ();
+				
+				cout<< "Your configuration has been saved.\n";	
+				}
+				catch(exception X)
+				{
+				cout<< "\n\tError! Could not save the file.";
+			}
+		}
+	string name;
+	int age;
+	int studentnumber;
+};
+
+class Load{ //Load class
+	public:
+			Load(){
+			ifstream FinalProject;
+			FinalProject.open("FinalProjectCSPROG2.txt", ios::in);
+			if(!FinalProject){
+				cout<< "\n\tError! Could not save file.";
+			}	
+			else
+				
+			getline(FinalProject,name);
+			cin >> age;
+			cin >> studentnumber;
+				
+			FinalProject.close();
+			}
+			string name;
+			int age;
+			int studentnumber;
+};
+class Quit{
+	public:
+		Quit(){
+		cout << "You have decided to quit the program." << endl;
+		}
+};
+int main(){
+	
+	char option;
+	while(option !='q')
+	{
+		cout<<"\n\t\t\t\t---------------Welcome!------------------";
+		cout<<"\n\t\t\t\t*                                    	*";
+		cout<<"\n\t\t\t\t*    [A]Register		 	*";
+		cout<<"\n\t\t\t\t*    [B]Edit     			*";
+		cout<<"\n\t\t\t\t*    [C]Save Configuration 		*";
+		cout<<"\n\t\t\t\t*    [D]Load Configuration        	*";
+		cout<<"\n\t\t\t\t*    [Q]Quit				*";
+		cout<<"\n\t\t\t\t*                                     	*";
+		cout<<"\n\t\t\t\t-----------------------------------------\n\n";
+		
+		cin>>option;
+		switch(option){
+			case 'A':
+			case 'a':
+				Register();
+				break;
+			case 'b':
+			case 'B':
+				Edit();
+				break;
+			case 'c':
+			case 'C':
+				Save();
+				break;
+			case 'd':
+			case 'D':
+				Load();
+				break;
+			case 'q':
+			case 'Q':
+				Quit();
+				break;
+			default:
+				cout << "Invalid input, try again.\n";
+				break;
+		}
+	}
+	return 0;
+}
+
